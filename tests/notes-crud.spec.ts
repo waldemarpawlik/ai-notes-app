@@ -10,12 +10,11 @@ const TEST_NOTE = {
   content: 'This is a test note content that is longer than 50 characters to trigger AI features.'
 }
 
-test.describe('Notes CRUD Flow', () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto('/')
-  })
+test.beforeEach(async ({ page }) => {
+  await page.goto('/')
+})
 
-  test('complete user flow: signup, login, create note, edit note, delete note', async ({ page }) => {
+test('complete user flow: signup, login, create note, edit note, delete note', async ({ page }) => {
     // 1. User Registration (if not exists)
     await expect(page.locator('h1')).toContainText('AI Notes')
     
@@ -99,9 +98,9 @@ test.describe('Notes CRUD Flow', () => {
     
     // Powinien być widoczny stan pustej listy
     await expect(page.locator('text=Brak notatek')).toBeVisible()
-  })
+})
 
-  test('navigation and UI elements', async ({ page }) => {
+test('navigation and UI elements', async ({ page }) => {
     // Ten test sprawdza podstawowe elementy UI bez logowania
     
     // Sprawdź główną stronę
@@ -121,9 +120,9 @@ test.describe('Notes CRUD Flow', () => {
       await page.locator('button', { hasText: 'Masz już konto?' }).click()
       await expect(page.locator('button', { hasText: 'Zaloguj się' })).toBeVisible()
     }
-  })
+})
 
-  test('form validation', async ({ page }) => {
+test('form validation', async ({ page }) => {
     // Test walidacji formularzy bez faktycznego logowania
     
     // Spróbuj wysłać pusty formularz logowania
@@ -139,5 +138,4 @@ test.describe('Notes CRUD Flow', () => {
     
     const passwordInput = page.locator('input[type="password"]')
     await expect(passwordInput).toHaveAttribute('required')
-  })
 })
